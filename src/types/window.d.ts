@@ -1,12 +1,14 @@
+// https://eips.ethereum.org/EIPS/eip-1193
+// https://github.com/MetaMask/inpage-provider
+export interface RequestArguments {
+    readonly method: string,
+    readonly params?: unknown[] | object
+}
+
 export interface Ethereum {
-    enable: () => Promise<void>
-    selectedAddress: string | null
-    isConnected: () => boolean
-    request: (any) => any
-    isMetaMask: () => boolean
-    chainId: string
-    on: any
-    currentProvider: (any) => any
+    request: (args: RequestArguments) => Promise<unknown>
+    isMetaMask: boolean
+    chainId: string | undefined
 }
 
 declare global {

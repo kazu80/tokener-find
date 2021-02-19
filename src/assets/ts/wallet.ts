@@ -1,5 +1,10 @@
 const account = new Map();
 
+const NETWORK = {
+    MAIN: 1,
+    ROPSTEN: 3
+}
+
 export const clickAccountButton = async function () {
     if (!isMetamask()) {
         alert("MetaMaskをインストールしてください")
@@ -17,6 +22,7 @@ export const clickAccountButton = async function () {
     }
 
     alert("MetaMaskにログインしました.")
+
     loggedInStyle(this)
 }
 
@@ -24,11 +30,6 @@ function loggedInStyle(button: HTMLButtonElement) {
     button.classList.replace("btn-outline-warning", "btn-outline-success")
     button.classList.add("disabled");
     button.textContent = "LOGGED IN"
-}
-
-const NETWORK = {
-    MAIN: 1,
-    ROPSTEN: 3
 }
 
 function isMainNet() {
@@ -46,7 +47,7 @@ async function getAccount() {
 
     account.set("account", null);
 
-    const accounts = await window.ethereum.request({method: 'eth_accounts'})
+    const accounts = await window.ethereum.request({method: 'eth_accounts'}) as string[]
 
     if (accounts.length > 0) {
         account.set("account", accounts[0]);
