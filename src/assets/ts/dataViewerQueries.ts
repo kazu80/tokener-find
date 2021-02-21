@@ -1,8 +1,14 @@
-export type PropertyMeta = {
-    author: string,
-    property: string,
-    name?: string,
-    symbol?: string
+export function tokensQuery (address) {
+    return `
+        query Properties {
+            property_meta(where: {author: {_eq: "${address}"}}) {
+                property
+                author
+                name
+                symbol
+            }
+        }
+        `;
 }
 
 export function allAuthorQuery () {
@@ -11,19 +17,6 @@ export function allAuthorQuery () {
             property_meta(distinct_on: author) {
                 property
                 author
-            }
-        }
-        `;
-}
-
-export function propertiesAuthor (author) {
-    return `
-        query Properties {
-            property_meta(where: {author: {_eq: "${author}"}}) {
-                property
-                author
-                name
-                symbol
             }
         }
         `;

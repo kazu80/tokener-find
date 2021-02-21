@@ -1,5 +1,6 @@
-import {clickAccountButton} from "./wallet";
-import {renderCreator, renderCreators} from "./creators";
+import {clickLoginButton} from "./wallet";
+import {renderCreator, renderCreators, renderCreatorTokens} from "./creators";
+import {getTokens} from "./dataViewer";
 
 window.addEventListener("load",async () => {
     if (document.getElementById("page-index")) {
@@ -8,9 +9,6 @@ window.addEventListener("load",async () => {
     }
 
     if (document.getElementById("page-tokens")) {
-        const accountButton = document.getElementById("account-button")
-        accountButton.addEventListener('click', clickAccountButton);
-
         const urlParams = new URLSearchParams(window.location.search);
         const creator   = urlParams.get('creator')
 
@@ -18,7 +16,14 @@ window.addEventListener("load",async () => {
             window.location.href = '/'
         }
 
+        const loginButton = document.getElementById("login-button")
+        loginButton.addEventListener('click', clickLoginButton);
+
         const creatorHTMLElement = document.getElementById("creator") as HTMLDivElement;
         await renderCreator(creatorHTMLElement, creator);
+
+        const tokensHTMLElement = document.getElementById("tokens") as HTMLDivElement;
+        await renderCreatorTokens(tokensHTMLElement, creator)
+
     }
 });

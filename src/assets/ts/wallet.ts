@@ -5,7 +5,7 @@ const NETWORK = {
     ROPSTEN: 3
 }
 
-export const clickAccountButton = async function () {
+export const clickLoginButton = async function () {
     if (!isMetamask()) {
         alert("MetaMaskをインストールしてください")
         return
