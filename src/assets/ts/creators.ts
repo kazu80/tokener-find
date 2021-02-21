@@ -1,8 +1,8 @@
-import {getBorderElement, getProfileElement} from "./htmlElementTemplate";
+import {getBorderElement, getProfileElement, getProfileElementStringForTokensPage} from "./htmlElementTemplate";
 import {getAllCreatorInfo} from "./dataViewer";
 import {getCreatorInfo} from "./devForApps";
 
-export const renderCreators = async (creators: HTMLDivElement) => {
+export const renderCreators = async (creatorsHTMLElement: HTMLDivElement) => {
     for ( const info of await getAllCreatorInfo()) {
         try {
             const creatorInfoElement = await getCreatorInfoTemplate(info.author);
@@ -11,15 +11,26 @@ export const renderCreators = async (creators: HTMLDivElement) => {
                 continue
             }
 
-            creators.appendChild(creatorInfoElement);
+            creatorsHTMLElement.appendChild(creatorInfoElement);
 
             const borderElement = getBorderElement();
 
-            creators.appendChild(borderElement);
+            creatorsHTMLElement.appendChild(borderElement);
         } catch (e) {
             console.error(e);
         }
     }
+}
+
+export const renderCreator = async (creatorHTMLElement: HTMLDivElement, creatorAddress) => {
+    const creatorInfo = await getCreatorInfo(creatorAddress);
+
+    const profileElementString = getProfileElementStringForTokensPage(
+        creatorInfo.portrait.url,
+        creatorInfo.name
+    );
+
+    creatorHTMLElement.innerHTML = profileElementString;
 }
 
 const getCreatorInfoTemplate = async (address) : Promise<HTMLElement> => {
