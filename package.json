@@ -4,13 +4,16 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
+    "@devprotocol/dev-kit": "4.1.0",
     "ts-loader": "^8.0.14",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "web3": "^1.3.4"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
     "mini-css-extract-plugin": "^1.3.4",
+    "node-polyfill-webpack-plugin": "^1.0.2",
     "node-sass": "^5.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "sass-loader": "^10.1.1",

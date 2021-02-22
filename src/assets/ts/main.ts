@@ -1,6 +1,5 @@
 import {clickLoginButton} from "./wallet";
 import {renderCreator, renderCreators, renderCreatorTokens} from "./creators";
-import {getTokens} from "./dataViewer";
 
 window.addEventListener("load",async () => {
     if (document.getElementById("page-index")) {

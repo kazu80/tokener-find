@@ -6,6 +6,7 @@ import {
 } from "./htmlElementTemplate";
 import {getAllCreatorInfo, getTokens} from "./dataViewer";
 import {getCreatorInfo, getPropertiesInfo} from "./devForApps";
+import {stakeDev} from "./devKit";
 
 export const renderCreators = async (creatorsHTMLElement: HTMLDivElement) => {
     for ( const info of await getAllCreatorInfo()) {
@@ -50,13 +51,33 @@ export const renderCreatorTokens = async (tokensHTMLElement: HTMLElement, creato
 
         const image = tokenInfo.cover_image ? tokenInfo.cover_image.url : "https://fakeimg.pl/128x96/?text=no image"
 
-        const tokenElement = getTokenElement(image, token.name)
+        const tokenElement = getTokenElement(token.property, image, token.name)
+
+        setClickEvent(tokenElement.querySelectorAll('button'));
 
         tokensHTMLElement.appendChild(tokenElement)
 
         const borderElement = getBorderElement();
 
         tokensHTMLElement.appendChild(borderElement)
+    }
+}
+
+const setClickEvent = (buttons) => {
+    for ( const button of buttons) {
+        button.addEventListener('click', async function () {
+            try {
+                const address = this.getAttribute("address")
+                const amount  = this.getAttribute("amount")
+
+                const result = await stakeDev(address, amount)
+            } catch (e) {
+                console.error("error", e)
+                if (e.code === 4001) {
+                    alert("処理を取り消しました")
+                }
+            }
+        })
     }
 }
 

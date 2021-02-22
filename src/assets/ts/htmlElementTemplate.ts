@@ -29,7 +29,7 @@ export const getProfileElementStringForTokensPage = (image, name) => {
     `;
 }
 
-export const getTokenElement = (image, name) => {
+export const getTokenElement = (address, image, name) => {
     const div = document.createElement('div');
 
     div.innerHTML = `
@@ -38,9 +38,9 @@ export const getTokenElement = (image, name) => {
                 <div class="d-flex flex-column justify-content-between">
                     <p class="fs-6">${name}</p>
                     <div class="d-flex">
-                        <button type="button" class="me-3 btn btn-lg btn-primary">1 DEV</button>
-                        <button type="button" class="me-3 btn btn-lg btn-success">5 DEV</button>
-                        <button type="button" class="btn btn-lg btn-danger">10 DEV</button>
+                        <button type="button" class="me-3 btn btn-lg btn-primary" address="${address}" amount="1">1 DEV</button>
+                        <button type="button" class="me-3 btn btn-lg btn-success" address="${address}" amount="1">5 DEV</button>
+                        <button type="button" class="btn btn-lg btn-danger" address="${address}" amount="1">10 DEV</button>
                     </div>
                 </div>
             </article>
