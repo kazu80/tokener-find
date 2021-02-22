@@ -8,25 +8,43 @@ const NETWORK = {
 export const clickLoginButton = async function () {
     if (!isMetamask()) {
         alert("MetaMaskをインストールしてください")
-        return
+        return;
     }
 
-    if (! await isLogin()) {
+    if (! await isMetaMaskLogin()) {
         alert("MetaMaskからログインしてください")
-        return
+        return;
     }
 
     if (!isMainNet()) {
         alert("メインネットに切り替えてください")
-        return
+        return;
     }
 
     alert("MetaMaskにログインしました.")
 
     loggedInStyle(this)
+
+    window.location.reload();
 }
 
-function loggedInStyle(button: HTMLButtonElement) {
+export const isLogin = async (): Promise<boolean> => {
+    if (!isMetamask()) {
+        return false;
+    }
+
+    if (! await isMetaMaskLogin()) {
+        return false;
+    }
+
+    if (!isMainNet()) {
+        return false;
+    }
+
+    return true;
+}
+
+export const loggedInStyle = (button: HTMLButtonElement) => {
     button.classList.replace("btn-outline-warning", "btn-outline-success")
     button.classList.add("disabled");
     button.textContent = "LOGGED IN"
@@ -56,6 +74,6 @@ async function getAccount() {
     return account.get("account")
 }
 
-async function isLogin(): Promise<boolean> {
+async function isMetaMaskLogin(): Promise<boolean> {
     return !! await getAccount();
 }

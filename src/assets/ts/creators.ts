@@ -7,6 +7,7 @@ import {
 import {getAllCreatorInfo, getTokens} from "./dataViewer";
 import {getCreatorInfo, getPropertiesInfo} from "./devForApps";
 import {stakeDev} from "./devKit";
+import {isLogin} from "./wallet";
 
 export const renderCreators = async (creatorsHTMLElement: HTMLDivElement) => {
     for ( const info of await getAllCreatorInfo()) {
@@ -53,13 +54,23 @@ export const renderCreatorTokens = async (tokensHTMLElement: HTMLElement, creato
 
         const tokenElement = getTokenElement(token.property, image, token.name)
 
-        setClickEvent(tokenElement.querySelectorAll('button'));
+        if (! await isLogin()) {
+            setDisable(tokenElement.querySelectorAll('button'))
+        }
+
+        setClickEvent(tokenElement.querySelectorAll('button'))
 
         tokensHTMLElement.appendChild(tokenElement)
 
-        const borderElement = getBorderElement();
+        const borderElement = getBorderElement()
 
         tokensHTMLElement.appendChild(borderElement)
+    }
+}
+
+const setDisable = (buttons) => {
+    for ( const button of buttons) {
+        button.classList.add("disabled")
     }
 }
 

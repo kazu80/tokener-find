@@ -1,4 +1,4 @@
-import {clickLoginButton} from "./wallet";
+import {clickLoginButton, isLogin, loggedInStyle} from "./wallet";
 import {renderCreator, renderCreators, renderCreatorTokens} from "./creators";
 
 window.addEventListener("load",async () => {
@@ -15,8 +15,12 @@ window.addEventListener("load",async () => {
             window.location.href = '/'
         }
 
-        const loginButton = document.getElementById("login-button")
+        const loginButton = document.getElementById("login-button") as HTMLButtonElement
         loginButton.addEventListener('click', clickLoginButton);
+
+        if (await isLogin()) {
+            loggedInStyle(loginButton)
+        }
 
         const creatorHTMLElement = document.getElementById("creator") as HTMLDivElement;
         await renderCreator(creatorHTMLElement, creator);
