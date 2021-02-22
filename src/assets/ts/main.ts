@@ -12,7 +12,7 @@ window.addEventListener("load",async () => {
         const creator   = urlParams.get('creator')
 
         if (!creator) {
-            window.location.href = '/'
+            window.location.href = 'index.html'
         }
 
         const loginButton = document.getElementById("login-button") as HTMLButtonElement

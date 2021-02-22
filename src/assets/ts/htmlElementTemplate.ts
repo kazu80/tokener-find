@@ -15,7 +15,7 @@ export const getProfileElement = (address, image, name): HTMLElement => {
                 <img class="rounded-circle me-3" src="${image}" alt="creator image" width="60" height="60" style="object-fit: contain">
                 <p class="fs-6">${name}</p>
             </div>
-            <a href="/tokens.html?creator=${address}" class="col-2 d-flex align-items-center justify-content-center btn btn-primary">TOKEN</a>
+            <a href="tokens.html?creator=${address}" class="col-2 d-flex align-items-center justify-content-center btn btn-primary">TOKEN</a>
         </article>
     `;
 
