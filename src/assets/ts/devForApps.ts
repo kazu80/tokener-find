@@ -1,6 +1,6 @@
-export const getCreatorInfo = async (address) => {
+export const getCreatorInfo = async (creatorAddress) => {
     const query_params = new URLSearchParams({
-        address: address,
+        address: creatorAddress,
     });
 
     const response = await fetch("https://dev-for-apps.azureedge.net/accounts?" + query_params, {

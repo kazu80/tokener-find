@@ -15,7 +15,6 @@ export function allAuthorQuery () {
     return `
         query Properties {
             property_meta(distinct_on: author) {
-                property
                 author
             }
         }
