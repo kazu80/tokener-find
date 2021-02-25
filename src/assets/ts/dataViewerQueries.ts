@@ -5,7 +5,6 @@ export function tokensQuery (address) {
                 property
                 author
                 name
-                symbol
             }
         }
         `;
