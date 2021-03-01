@@ -11,6 +11,11 @@ export const clickLoginButton = async function () {
         return;
     }
 
+    if (! await connectMetaMask()) {
+        alert("MetaMaskとの接続を許可してください")
+        return;
+    }
+
     if (! await isMetaMaskLogin()) {
         alert("MetaMaskからログインしてください")
         return;
@@ -76,4 +81,16 @@ async function getAccount() {
 
 async function isMetaMaskLogin(): Promise<boolean> {
     return !! await getAccount();
+}
+
+async function connectMetaMask(): Promise<boolean> {
+    try {
+        await window.ethereum.request({method: 'eth_requestAccounts'})
+    } catch (e) {
+        if (e.code === 4001) {
+            return false
+        }
+    }
+
+    return true
 }
