@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin    = require('mini-css-extract-plugin');
 const CopyWebpackPlugin       = require('copy-webpack-plugin');
+const NodePolyfillPlugin      = require("node-polyfill-webpack-plugin");
 
 module.exports = {
     // モード値を production に設定すると最適化された状態で、
@@ -60,6 +61,8 @@ module.exports = {
     },
 
     plugins: [
+        new NodePolyfillPlugin(),
+
         // cssの出力先を指定する
         new MiniCssExtractPlugin({filename: '../css/[name].css'}),
 
